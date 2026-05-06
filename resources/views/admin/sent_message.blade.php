@@ -1,112 +1,117 @@
 <!DOCTYPE html>
-<html> 
-    <style>
-.room-form-card{
-    background:#2c2f33;
-    padding:30px;
-    border-radius:10px;
-    max-width:700px;
-    margin:auto;
-    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+<html lang="en">
+
+@include('admin.css')
+
+<style>
+.mail-card {
+    background: #2c2f33;
+    padding: 35px;
+    border-radius: 12px;
+    max-width: 750px;
+    margin: 40px auto;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.4);
 }
-.room-form-card h1{
-    color:#fff;
-    margin-bottom:25px;
-    text-align:center;
-    font-weight:600;
+
+.mail-card h2 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 600;
 }
-.form-group label{
-    color:#ccc;
-    font-weight:500;
-    margin-bottom:6px;
+
+.form-label {
+    color: #ccc;
+    margin-bottom: 5px;
 }
-.form-control,
-.form-select{
-    background:#1f2226;
-    border:1px solid #444;
-    color:#fff;
+
+.form-control {
+    background: #1f2226;
+    border: 1px solid #444;
+    color: #fff;
 }
-.form-control:focus,
-.form-select:focus{
-    background:#1f2226;
-    border-color:#ff4c60;
-    box-shadow:none;
-    color:#fff;
+
+.form-control:focus {
+    border-color: #ff4c60;
+    box-shadow: none;
+    background: #1f2226;
 }
-.submit-btn{
-    background:#ff4c60;
-    border:none;
-    padding:10px 25px;
-    color:#fff;
-    border-radius:5px;
-    transition:0.3s;
+
+.btn-send {
+    background: #ff4c60;
+    border: none;
+    padding: 10px 30px;
+    color: #fff;
+    border-radius: 6px;
+    transition: 0.3s;
 }
-.submit-btn:hover{
-    background:#e84356;
+
+.btn-send:hover {
+    background: #e84356;
 }
 </style>
-  @include('admin.css')
-  <body>
-    @include('admin.header')
-    <div class="d-flex align-items-stretch">
-     @include('admin.slidebar')
-    <div class="page-content">
+
+<body>
+
+@include('admin.header')
+
+<div class="d-flex align-items-stretch">
+@include('admin.slidebar')
+
+<div class="page-content">
 <div class="page-header">
 <div class="container-fluid">
-   
 
+    <div class="mail-card">
 
-  <div class="room-form-card">
+        <h2>Send Mail to {{$data->name}}</h2>
 
-  <h1>Mail Send To {{$data->name}}</h1>
+        <form action="{{ url('sent', $data->id) }}" method="POST">
+            @csrf
 
-  <form action="{{url('sent', $data->id)}}" method="POST">
+            <div class="row">
 
-<div class="col-md-6 mb-3">
-<label>Greeting</label>
-<input type="text" name="greeting" class="form-control" placeholder="Enter Greeting">
-</div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Greeting</label>
+                    <input type="text" name="greeting" class="form-control" placeholder="Enter greeting">
+                </div>
 
-<div class="col-md-12 mb-3">
-<label>Mail Body</label>
-<textarea  name="mail_body" rows="4" class="form-control" placeholder="Mail Body"></textarea>
-</div>
+                <div class="col-md-12 mb-3">
+                    <label class="form-label">Mail Body</label>
+                    <textarea name="mail_body" rows="4" class="form-control" placeholder="Write your message..."></textarea>
+                </div>
 
-<div class="col-md-6 mb-3">
-<label>Action Text</label>
-<input type="text" name="action_text"  class="form-control" placeholder="Enter Action Text">
-</div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Action Text</label>
+                    <input type="text" name="action_text" class="form-control" placeholder="Button text">
+                </div>
 
-<div class="col-md-6 mb-3">
-<label>Action Url</label>
-<input type="text" name="action_url"  class="form-control" placeholder="Enter Action Url">
-</div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Action URL</label>
+                    <input type="text" name="action_url" class="form-control" placeholder="https://example.com">
+                </div>
 
-<div class="col-md-6 mb-3">
-<label>End Line</label>
-<input type="text" name="end_line"  class="form-control" placeholder="Enter End Line">
-</div>
+                <div class="col-md-6 mb-4">
+                    <label class="form-label">End Line</label>
+                    <input type="text" name="end_line" class="form-control" placeholder="Closing line">
+                </div>
 
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn-send">
+                        🚀 Send Mail
+                    </button>
+                </div>
 
+            </div>
+        </form>
 
-
-
-
-
-<div class="col-md-12 text-center">
-<button type="submit" class="submit-btn">
-Send Mail
-</button>
-</div>
-
-</div>
-</form>
-  
-       </div>
-
-
+    </div>
 
 </div>
 </div>
 </div>
-        @include('admin.footer')
+
+@include('admin.footer')
+
+</body>
+</html>
