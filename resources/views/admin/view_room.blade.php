@@ -1,100 +1,183 @@
 <!DOCTYPE html>
-   <style>
-.cat{
-     text-align: center;
-    font-weight: bold;
-    color: white;
-    padding-bottom: 50px;
+<html>
+
+@include('admin.css')
+
+<style>
+
+.page-wrapper{
+    padding: 30px;
 }
-    .table {
+
+.heading{
     text-align: center;
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 40px;
+    font-size: 32px;
+}
+
+.room-table{
+    width: 100%;
+    max-width: 1200px;
     margin: auto;
-    width: 1200px;       
-    border: 2px solid white;
-    table-layout: fixed; 
-    margin-top: 50px;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 10px;
 }
 
-th {
-    background-color: rgba(171, 21, 101, 0.78);
-     padding: 10px;
-     color: white;
-     font-weight: bold;
-}      
-td {
-    
-     color: white;
-     border: 3px solid white;
-     padding: 10px;
-     font-weight: bold;
+.room-table th{
+    background: #b11565;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 16px;
 }
 
-
-
-.room_image{
-
-    width:120px;
-    height: auto; 
+.room-table td{
+    background: #2d3035;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-bottom: 2px solid #444;
 }
-  </style>
-<html> 
-  @include('admin.css')
-  <body>
-    @include('admin.header')
-    <div class="d-flex align-items-stretch">
-     @include('admin.slidebar')
-   
-    <div class="page-content">
+
+.room-table tr:hover{
+    background: rgba(255,255,255,0.05);
+    transition: 0.3s;
+}
+
+.room-img{
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.action-box{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.edit-btn{
+    background: #b11565;
+    color: white;
+    padding: 6px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.delete-btn{
+    background: red;
+    color: white;
+    border: none;
+    padding: 6px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+</style>
+
+<body>
+
+@include('admin.header')
+
+<div class="d-flex align-items-stretch">
+
+@include('admin.slidebar')
+
+<div class="page-content">
 <div class="page-header">
 <div class="container-fluid">
 
+<div class="page-wrapper">
 
-<div>
-    <h1 class="cat">View Room Details</h1>
-    <table  class="table">
-<tr>
+<h1 class="heading">Room Details</h1>
 
-<th>Room Title</th>
-<th>Description</th>
-<th>Price</th>
-<th>Room Type</th>
-<th>Wifi Status</th>
-<th>Room Image</th>
-<th>Action</th>
-</tr>
-@foreach($data as $item)
-<tr>
+<table class="room-table">
 
-<td>{{$item->room_title}}</td>
-<td>{{ Str::limit($item->description, 50) }}</td>
-<td>${{$item->price}}</td>
-<td>{{$item->room_type}}</td>
-<td>{{$item->wifi}}</td>
+    <tr>
+        <th>Room Title</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Room Type</th>
+        <th>Wifi</th>
+        <th>Image</th>
+        <th>Actions</th>
+    </tr>
 
-<td><img src="roomimage/{{$item->room_img}}" alt="" class="room_image"></td>
-<td  style="text-align: center;">
-            <div style="display: flex; justify-content: center; gap: 10px; align-items: center;">
-            <a href="{{url('edit_room', $item->id)}}" 
-                        style="padding:5px 15px; background-color:rgba(171, 21, 101, 0.78);
-                             color:white; border:none; text-decoration:none; border-radius:3px; font-size:14px;">
-                                 Edit
-                                     </a>  
-           <form action="{{route('delete_room', $item->id)}}" method="POST" 
-             onsubmit="return confirm('Are you sure you want to delete this category?');">
+@foreach($data as $room)
+
+    <tr>
+
+        <td>{{$room->room_title}}</td>
+
+        <td>
+            {{ Str::limit($room->description, 50) }}
+        </td>
+
+        <td>
+            ${{$room->price}}
+        </td>
+
+        <td>
+            {{$room->room_type}}
+        </td>
+
+        <td>
+            {{$room->wifi}}
+        </td>
+
+        <td>
+            <img class="room-img" 
+                 src="roomimage/{{$room->room_img}}" 
+                 alt="Room Image">
+        </td>
+
+        <td>
+
+            <div class="action-box">
+
+                <a class="edit-btn"
+                   href="{{url('edit_room', $room->id)}}">
+                    Edit
+                </a>
+
+                <form action="{{route('delete_room', $room->id)}}"
+                      method="POST"
+                      onsubmit="return confirm('Are you sure to delete this room?')">
+
                     @csrf
                     @method('DELETE')
-                    <button type="submit" style="padding:5px 10px; background-color:red; color:white; border:none; cursor:pointer;">
+
+                    <button type="submit" class="delete-btn">
                         Delete
                     </button>
-                </form></td> </div>
-</tr>
+
+                </form>
+
+            </div>
+
+        </td>
+
+    </tr>
+
 @endforeach
-    </table>
+
+</table>
+
 </div>
 
 </div>
 </div>
 </div>
-       </div>
 
-        @include('admin.footer')
+</div>
+
+@include('admin.footer')
+
+</body>
+</html>
