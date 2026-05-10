@@ -1,120 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      @include('home.css')
-   </head>
-   <body>
-      @include('home.head_inner')
-      
-      
+<head>
+    @include('home.css')
+</head>
+<body>
 
-      <!---Room Start-->
-  <div class="rooms">
-   <div class="container">
-      <div class="row">
-         <div class="col-md-12">
-            <div class="titlepage">
-               <h2>Our Room</h2>
-               <p>Experience the luxury of our stay.</p>
+@include('home.head_inner')
+
+<!-- Our Rooms Section -->
+<section class="our-rooms-section">
+    <div class="container">
+
+        <!-- Section Heading -->
+        <div class="section-header text-center">
+            <h2>Our Luxury Rooms</h2>
+            <p>Choose your perfect stay and enjoy premium comfort.</p>
+        </div>
+
+        <!-- Room Cards -->
+        <div class="row">
+
+            @foreach($room as $item)
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <div class="room-card">
+
+                    <!-- Room Image -->
+                    <div class="room-image">
+                        <img src="roomimage/{{$item->room_img}}" alt="Room Image">
+                    </div>
+
+                    <!-- Room Content -->
+                    <div class="room-content">
+
+                        <h4>{{$item->room_title}}</h4>
+
+                        <p>
+                            {!! Str::limit($item->description, 100) !!}
+                        </p>
+
+                        <div class="room-btn">
+                            <a href="{{url('room_details',$item->id)}}" class="details-btn">
+                                Explore Room
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
-         </div>
-      </div>
-      <div class="row">
-         @foreach($room as $rooms)
-         <div class="col-md-4 col-sm-6">
-            <div id="serv_hover" class="room">
-               <div class="room_img">
-                  <figure>
-                     <img src="roomimage/{{$rooms->room_img}}" alt="#" style="height: 200px; width: 100%; object-fit: cover;"/>
-                  </figure>
-               </div>
-               <div class="bed_room">
-                  <h3>{{$rooms->room_title}}</h3>
-                  <p>{!! Str::limit($rooms->description, 100) !!}</p>
-                  <a class="btn btn-primary" href="{{url('room_details', $rooms->id)}}">View Details</a>
-               </div>
-            </div>
-         </div>
-         @endforeach
-      </div>
-   </div>
-</div>
+
+            @endforeach
+
+        </div>
+
+    </div>
+</section>
 
 <style>
-  /* Room Section Design */
-.rooms {
-    padding: 60px 0;
-    background-color: #f8f9fa;
+
+/* ===== SECTION STYLE ===== */
+
+.our-rooms-section{
+    padding: 80px 0;
+    background: linear-gradient(to right, #f8f9fa, #eef2f3);
 }
 
-.room {
-    background: #fff;
-    border-radius: 15px;
-    overflow: hidden;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
+/* ===== HEADING ===== */
+
+.section-header{
+    margin-bottom: 50px;
 }
 
-/* Card Hover Effect */
-.room:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
-
-.room_img figure {
-    margin: 0;
-    overflow: hidden;
-}
-
-.room_img img {
-    transition: transform 0.5s ease;
-}
-
-.room:hover .room_img img {
-    transform: scale(1.1); /* ইমেজে জুম ইফেক্ট */
-}
-
-.bed_room {
-    padding: 20px;
-    text-align: center;
-}
-
-.bed_room h3 {
-    font-size: 22px;
+.section-header h2{
+    font-size: 42px;
     font-weight: 700;
-    color: #333;
+    color: #222;
     margin-bottom: 10px;
 }
 
-.bed_room p {
-    color: #666;
+.section-header p{
+    color: #777;
+    font-size: 16px;
+}
+
+/* ===== ROOM CARD ===== */
+
+.room-card{
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: 0.4s ease;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+    height: 100%;
+}
+
+.room-card:hover{
+    transform: translateY(-12px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+}
+
+/* ===== IMAGE ===== */
+
+.room-image{
+    overflow: hidden;
+}
+
+.room-image img{
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    transition: 0.5s ease;
+}
+
+.room-card:hover .room-image img{
+    transform: scale(1.08);
+}
+
+/* ===== CONTENT ===== */
+
+.room-content{
+    padding: 25px;
+    text-align: center;
+}
+
+.room-content h4{
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #111;
+}
+
+.room-content p{
     font-size: 14px;
-    margin-bottom: 20px;
-    height: 45px; 
+    color: #666;
+    line-height: 1.7;
+    min-height: 70px;
 }
 
+/* ===== BUTTON ===== */
 
-.bed_room .btn-primary {
-    background-color: #ff385c; 
-    border: none;
-    padding: 10px 25px;
-    border-radius: 30px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    margin-top:40px;
+.room-btn{
+    margin-top: 25px;
 }
 
-.bed_room .btn-primary:hover {
-    background-color: #333; 
+.details-btn{
+    display: inline-block;
+    padding: 12px 28px;
+    background: #ff4d6d;
     color: #fff;
-    box-shadow: 0 5px 15px rgba(255, 56, 92, 0.4);
-    letter-spacing: 1px; 
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s ease;
 }
+
+.details-btn:hover{
+    background: #222;
+    color: #fff;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
 </style>
-<!--Room End-->
-     
-     
-      @include('home.footer')
-   </body>
+
+@include('home.footer')
+
+</body>
 </html>
