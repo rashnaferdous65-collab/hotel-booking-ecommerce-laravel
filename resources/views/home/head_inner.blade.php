@@ -1,146 +1,230 @@
 <body class="main-layout">
 
-<!-- loader
-<div class="loader_bg">
-    <div class="loader">
-        <img src="images/loading.gif" alt="#">
-    </div>
-</div>
- end loader -->
+<!-- ===== Header Start ===== -->
+<header class="header_area">
+    <div class="container">
+        <div class="row align-items-center">
 
-<!-- header -->
-<header>
-    <div class="header">
-        <div class="container">
-            <div class="row align-items-center">
+            <!-- Logo Section -->
+            <div class="col-lg-3 col-md-3 col-sm-4">
+                <div class="site_logo">
+                    <a href="{{ url('/') }}">
+                        <img src="images/logo.png" alt="Hotel Logo">
+                    </a>
+                </div>
+            </div>
 
-                <!-- LOGO -->
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
-                    <div class="logo">
-                        <a href="{{url('/')}}">
-                            <img src="images/logo.png" alt="logo">
-                        </a>
+            <!-- Menu Section -->
+            <div class="col-lg-9 col-md-9 col-sm-8">
+
+                <nav class="navbar navbar-expand-lg navbar-light custom_nav">
+
+                    <!-- Mobile Toggle -->
+                    <button class="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarMenu"
+                        aria-controls="navbarMenu"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <!-- Navbar Links -->
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
+
+                        <ul class="navbar-nav nav_menu">
+
+                            <li class="nav-item active">
+                                <a href="{{ url('/') }}" class="nav-link">
+                                    Home
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ url('our_about') }}" class="nav-link">
+                                    About
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ url('our_room') }}" class="nav-link">
+                                    Rooms
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ url('our_gallery') }}" class="nav-link">
+                                    Gallery
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ url('blog_us') }}" class="nav-link">
+                                    Blog
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ url('contact_us') }}" class="nav-link">
+                                    Contact
+                                </a>
+                            </li>
+
+                            <!-- Auth User -->
+                            @auth
+                            <li class="nav-item ml-lg-3">
+
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+
+                                    <button type="submit" class="logout_btn">
+                                        Logout
+                                    </button>
+                                </form>
+
+                            </li>
+                            @endauth
+
+                            <!-- Guest User -->
+                            @guest
+
+                            <li class="nav-item">
+                                <a href="{{ route('login') }}" class="nav-link login_btn">
+                                    Login
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('register') }}" class="register_btn">
+                                    Register
+                                </a>
+                            </li>
+
+                            @endguest
+
+                        </ul>
+
                     </div>
-                </div>
 
-                <!-- NAVBAR -->
-                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
-                    <nav class="navbar navbar-expand-md navbar-dark justify-content-end">
-
-                        <button class="navbar-toggler" type="button"
-                            data-toggle="collapse"
-                            data-target="#mainNav"
-                            aria-controls="mainNav"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-
-                        <div class="collapse navbar-collapse" id="mainNav">
-                            <ul class="navbar-nav ml-auto align-items-center">
-
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="{{url('/')}}">Home</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{url('our_about')}}">About</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{url('our_room')}}">Our Room</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{url('our_gallery')}}">Gallery</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{url('blog_us')}}">Blog</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{url('contact_us')}}">Contact Us</a>
-                                </li>
-
-                                @auth
-                                <li class="nav-item">
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger btn-sm">
-                                            Logout
-                                        </button>
-                                    </form>
-                                </li>
-                                @endauth
-
-                                @guest
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">Log In</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">Register</a>
-                                </li>
-                                @endguest
-
-                            </ul>
-                        </div>
-
-                    </nav>
-                </div>
+                </nav>
 
             </div>
+
         </div>
     </div>
 </header>
-<!-- end header -->
+<!-- ===== Header End ===== -->
+
+
 <style>
 
-  
-.header {
-    background: #ffffff;
+/* ===== Header ===== */
+
+.header_area{
+    width: 100%;
+    background: #fff;
+    padding: 12px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: relative;
+    z-index: 999;
 }
 
+/* ===== Logo ===== */
 
-.logo img {
-    max-height: 45px;
+.site_logo img{
+    max-height: 48px;
 }
 
+/* ===== Navbar ===== */
 
-.navbar {
+.custom_nav{
     padding: 0;
 }
 
-.navbar-nav .nav-item {
-    margin: 0 12px;
+.nav_menu .nav-item{
+    margin-left: 18px;
 }
 
-.navbar-nav .nav-link {
-    color: #000 !important;
+.nav_menu .nav-link{
+    color: #111 !important;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: 0.3s ease;
+    position: relative;
+}
+
+/* Hover Effect */
+
+.nav_menu .nav-link:hover{
+    color: #d60000 !important;
+}
+
+/* Active Menu */
+
+.nav_menu .active .nav-link{
+    color: #d60000 !important;
+}
+
+.nav_menu .active .nav-link::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background: #d60000;
+}
+
+/* ===== Buttons ===== */
+
+.logout_btn{
+    background: #dc3545;
+    border: none;
+    color: #fff;
+    padding: 7px 16px;
+    border-radius: 4px;
     font-size: 14px;
-    font-weight: 500;
-    padding: 25px 0;
-    line-height: 1;
-    white-space: nowrap; 
+    transition: 0.3s;
 }
 
-
-.navbar-nav .nav-item.active .nav-link {
-    color: red !important;
-    border-bottom: 2px solid red;
-    padding-bottom: 23px;
+.logout_btn:hover{
+    background: #b52a37;
 }
 
-
-.navbar-nav .nav-link:hover {
-    color: red !important;
+.register_btn{
+    background: #111;
+    color: #fff !important;
+    padding: 8px 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s;
 }
 
+.register_btn:hover{
+    background: #d60000;
+    text-decoration: none;
+}
 
-.navbar-nav form button {
-    margin-left: 10px;
-    font-size: 13px;
-    padding: 6px 14px;
+/* ===== Responsive ===== */
+
+@media(max-width:991px){
+
+    .nav_menu{
+        margin-top: 15px;
+        text-align: center;
+    }
+
+    .nav_menu .nav-item{
+        margin: 10px 0;
+    }
+
+    .register_btn{
+        display: inline-block;
+    }
+
 }
 
 </style>
