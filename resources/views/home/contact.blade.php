@@ -1,76 +1,150 @@
-  <!--  contact -->
-    <style>
+<!-- Contact Section -->
+<style>
 
-      .send-btn{
-    background-color: #000;
+.contact-section{
+    padding: 70px 0;
+    background: #f8f9fa;
+}
+
+.contact-card{
+    background: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.contact-title{
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.contact-title h2{
+    font-size: 42px;
+    font-weight: bold;
+    color: #111;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.input-field,
+.message-box{
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    outline: none;
+    transition: 0.3s ease;
+    font-size: 15px;
+}
+
+.input-field:focus,
+.message-box:focus{
+    border-color: #000;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+
+.message-box{
+    min-height: 140px;
+    resize: none;
+}
+
+.submit-btn{
+    background: linear-gradient(135deg,#000,#444);
     color: #fff;
     border: none;
-    padding: 12px 35px;
-    font-size: 15px;
+    padding: 12px 40px;
+    border-radius: 50px;
     font-weight: 600;
     letter-spacing: 1px;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    transition: 0.3s ease;
 }
 
-/* Hover effect */
-.send-btn:hover{
-    background-color: #fff;
+.submit-btn:hover{
+    background: #fff;
     color: #000;
-    border: 2px solid #000;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    border: 1px solid #000;
+    transform: translateY(-2px);
 }
 
-/* Click effect */
-.send-btn:active{
-    transform: scale(0.96);
+.map-box iframe{
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
-    </style>
-      <div class="contact">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="titlepage">
-                     <h2>Contact Us</h2>
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-md-6">
-                  <form id="request" class="main_form" action="{{url('contact')}}" method="POST">
-                     @csrf
-                     <div class="row">
-                        <div class="col-md-12 ">
-                           <input class="contactus" placeholder="Name" type="text" name="name" required> 
-                        </div>
-                        <div class="col-md-12">
-                           <input class="contactus" placeholder="Email" type="text" name="email" required> 
-                        </div>
-                        <div class="col-md-12">
-                           <input class="contactus" placeholder="Phone Number" type="tel" name="phone" required>                          
-                        </div>
-                        <div class="col-md-12">
-                           <textarea class="textarea" placeholder="Message" type="text" name="message" required>Message</textarea>
-                        </div>
-                     <div class="col-md-12">
-    <button type="submit" class="send-btn">SEND</button>
-</div>
+</style>
 
-                     </div>
-                  </form>
-               </div>
-               <div class="col-md-6">
-                  <div class="map_main">
-                     <div class="map-responsive">
-                        <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=Eiffel+Tower+Paris+France" width="600" height="400" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
-                     </div>
-                  </div>
-               </div>
+<div class="contact-section">
+   <div class="container">
+
+      <div class="contact-title">
+         <h2>Get In Touch</h2>
+      </div>
+
+      <div class="row">
+
+         <!-- Contact Form -->
+         <div class="col-md-6">
+            <div class="contact-card">
+
+               <form action="{{ url('contact') }}" method="POST">
+                  @csrf
+
+                  <input 
+                     type="text" 
+                     name="name" 
+                     class="input-field" 
+                     placeholder="Enter Your Name"
+                     required
+                  >
+
+                  <input 
+                     type="email" 
+                     name="email" 
+                     class="input-field" 
+                     placeholder="Enter Your Email"
+                     required
+                  >
+
+                  <input 
+                     type="tel" 
+                     name="phone" 
+                     class="input-field" 
+                     placeholder="Enter Phone Number"
+                     required
+                  >
+
+                  <textarea 
+                     name="message" 
+                     class="message-box" 
+                     placeholder="Write Your Message..."
+                     required
+                  ></textarea>
+
+                  <button type="submit" class="submit-btn">
+                     Send Message
+                  </button>
+
+               </form>
+
             </div>
          </div>
+
+         <!-- Map -->
+         <div class="col-md-6">
+            <div class="map-box">
+               <iframe 
+                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=Eiffel+Tower+Paris+France"
+                  width="100%" 
+                  height="500"
+                  frameborder="0"
+                  style="border:0;"
+                  allowfullscreen="">
+               </iframe>
+            </div>
+         </div>
+
       </div>
-      <!-- end contact -->
+   </div>
+</div>
+<!-- End Contact Section -->
