@@ -1,118 +1,192 @@
 <style>
-.booking-section{
-    display: flex;
-    justify-content: center;
-    margin: 60px 0;
-}
+    .booking-wrapper{
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f5f5f5;
+        padding: 40px 15px;
+    }
 
-.booking-card{
-    background: #ffffff;
-    width: 420px;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
+    .booking-box{
+        width: 450px;
+        background: #fff;
+        padding: 35px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
 
-.booking-card h1{
-    text-align: center;
-    margin-bottom: 25px;
-    color: #e60000;
-    font-weight: bold;
-}
+    .booking-title{
+        text-align: center;
+        color: #cc0000;
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 25px;
+    }
 
-.booking-card label{
-    font-weight: 600;
-    margin-bottom: 5px;
-    display: block;
-}
+    .input-group{
+        margin-bottom: 18px;
+    }
 
-.booking-card input{
-    width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    outline: none;
-    transition: 0.3s;
-}
+    .input-group label{
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+        color: #333;
+    }
 
-.booking-card input:focus{
-    border-color: #e60000;
-    box-shadow: 0 0 5px rgba(230,0,0,0.3);
-}
+    .input-group input{
+        width: 100%;
+        height: 45px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        padding: 0 12px;
+        transition: 0.3s ease;
+    }
 
-.booking-card button{
-    width: 100%;
-    padding: 12px;
-    background: #e60000;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
+    .input-group input:focus{
+        border-color: #cc0000;
+        box-shadow: 0 0 8px rgba(204,0,0,0.2);
+        outline: none;
+    }
 
-.booking-card button:hover{
-    background: #c40000;
-}
+    .booking-btn{
+        width: 100%;
+        height: 48px;
+        background: #cc0000;
+        border: none;
+        color: white;
+        font-size: 17px;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .booking-btn:hover{
+        background: #a80000;
+    }
 </style>
 
 <!DOCTYPE html>
 <html lang="en">
 
-@include('home.css')
-<base href="/public">
+<head>
+    @include('home.css')
+    <base href="/public">
+</head>
+
+<body>
+
 @include('home.head_inner')
 
-<div class="booking-section">
-    <div class="booking-card">
+<section class="booking-wrapper">
 
-        <h1>Hotel Room Booking</h1>
+    <div class="booking-box">
 
-     
-        <form action="{{url('add_booking', $room->id)}}" method="POST">
+        <h2 class="booking-title">Book Your Room</h2>
+
+        <form action="{{ url('add_booking',$room->id) }}" method="POST">
+
             @csrf
+
             <input type="hidden" name="room_id" value="{{ $room->id }}">
 
-            <label>Name</label>
-            <input type="text" name="name" placeholder="Enter your name" value="{{Auth::user()->name}}" required>
+            <div class="input-group">
+                <label>Full Name</label>
+                <input 
+                    type="text" 
+                    name="name"
+                    value="{{ Auth::user()->name }}"
+                    placeholder="Enter your full name"
+                    required
+                >
+            </div>
 
-            <label>Email</label>
-            <input type="email" name="email" placeholder="Enter your email" value="{{Auth::user()->email}}" required>
+            <div class="input-group">
+                <label>Email Address</label>
+                <input 
+                    type="email" 
+                    name="email"
+                    value="{{ Auth::user()->email }}"
+                    placeholder="Enter email address"
+                    required
+                >
+            </div>
 
-            <label>Phone</label>
-            <input type="tel" name="phone" placeholder="Enter phone number"value="{{Auth::user()->phone}}" required>
+            <div class="input-group">
+                <label>Phone Number</label>
+                <input 
+                    type="text" 
+                    name="phone"
+                    value="{{ Auth::user()->phone }}"
+                    placeholder="Enter phone number"
+                    required
+                >
+            </div>
 
-            <label>Start Date</label>
-            <input type="date" name="start_date"  required>
+            <div class="input-group">
+                <label>Check In</label>
+                <input 
+                    type="date" 
+                    id="check_in"
+                    name="start_date"
+                    required
+                >
+            </div>
 
-            <label>End Date</label>
-            <input type="date" name="end_date" required>
+            <div class="input-group">
+                <label>Check Out</label>
+                <input 
+                    type="date" 
+                    id="check_out"
+                    name="end_date"
+                    required
+                >
+            </div>
 
-            <label>Address</label>
-            <input type="text" name="address" placeholder="Enter address" value="{{Auth::user()->address}}">
+            <div class="input-group">
+                <label>Address</label>
+                <input 
+                    type="text" 
+                    name="address"
+                    value="{{ Auth::user()->address }}"
+                    placeholder="Enter your address"
+                >
+            </div>
 
-            <button type="submit">Book Room</button>
+            <button type="submit" class="booking-btn">
+                Confirm Booking
+            </button>
+
         </form>
 
     </div>
-</div>
+
+</section>
 
 @include('home.footer')
-</html>
-<script>
-   
-    let today = new Date().toISOString().split('T')[0];
 
-  
-    document.querySelector('input[name="start_date"]').setAttribute('min', today);
-    document.querySelector('input[name="end_date"]').setAttribute('min', today);
- 
-    document.querySelector('input[name="start_date"]').addEventListener('change', function () {
-        document.querySelector('input[name="end_date"]').setAttribute('min', this.value);
+<script>
+
+    let currentDate = new Date().toISOString().split('T')[0];
+
+    let checkIn = document.getElementById('check_in');
+    let checkOut = document.getElementById('check_out');
+
+    checkIn.min = currentDate;
+    checkOut.min = currentDate;
+
+    checkIn.addEventListener('input', function(){
+
+        checkOut.min = this.value;
+
     });
+
 </script>
+
+</body>
+</html>
 
     
