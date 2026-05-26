@@ -1,20 +1,39 @@
-     <!-- about -->
-      <div class="about">
-         <div class="container-fluid">
-            <div class="row">
-               <div class="col-md-5">
-                  <div class="titlepage">
-                     <h2>About Us</h2>
-                     <p>The passage experienced a surge in popularity during the 1960s when Letraset used it on their dry-transfer sheets, and again during the 90s as desktop publishers bundled the text with their software. Today it's seen all around the web; on templates, websites, and stock designs. Use our generator to get your own, or read on for the authoritative history of lorem ipsum. </p>
-                     <a class="read_more" href="Javascript:void(0)"> Read More</a>
-                  </div>
-               </div>
-               <div class="col-md-7">
-                  <div class="about_img">
-                     <figure><img src="images/about.png" alt="#"/></figure>
-                  </div>
-               </div>
+<!-- about section -->
+<section class="about_section">
+   <div class="container-fluid">
+      <div class="row align-items-center">
+
+         <div class="col-md-6">
+            <div class="about_image">
+               <figure>
+                  <img src="images/about.png" alt="About Image">
+               </figure>
             </div>
          </div>
+
+         <div class="col-md-6">
+            <div class="about_content">
+               <h2>Who We Are</h2>
+
+               <p>
+                  We are dedicated to providing comfortable and memorable experiences
+                  for our guests. Our hotel combines modern facilities with excellent
+                  customer service to make every stay enjoyable and relaxing.
+               </p>
+
+               <p>
+                  From luxury rooms to premium hospitality, we focus on quality,
+                  comfort, and satisfaction. Whether you are traveling for business
+                  or leisure, we are here to make your visit special.
+               </p>
+
+               <a class="read_more" href="javascript:void(0)">
+                  Explore More
+               </a>
+            </div>
+         </div>
+
       </div>
-      <!-- end about -->
+   </div>
+</section>
+<!-- end about section -->
